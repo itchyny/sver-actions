@@ -1,0 +1,24 @@
+name: Test setup action
+on: push
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        job:
+          - os: linux
+            runs-on: ubuntu-latest
+          - os: macos
+            runs-on: macos-latest
+          - os: windows
+            runs-on: windows-latest
+      fail-fast: false
+    runs-on: ${{ matrix.job.runs-on }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./setup
+        with:
+          version: v0.1.13
+          os: ${{ matrix.job.os }}
+      - name: test sver
+        run: sver --version
