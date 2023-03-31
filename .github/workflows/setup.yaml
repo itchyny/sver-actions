@@ -18,8 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./setup
-        with:
-          os: ${{ matrix.job.os }}
       - name: sver calc
         shell: bash
         run: sver calc
